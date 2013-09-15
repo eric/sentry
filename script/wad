@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-# Generated on: 14-09-2013 at 22:07
+# Generated on: 14-09-2013 at 22:09
 
 require 'time'
 require 'net/http'
@@ -61,15 +61,15 @@ class Presss
       end
     end
 
-    def bucket_in_path?
-      config[:bucket_in_path]
+    def bucket_in_hostname?
+      config[:bucket_in_hostname]
     end
 
     def url_prefix
-      if bucket_in_path?
-        "https://#{domain}/#{bucket_name}"
-      else
+      if bucket_in_hostname?
         "https://#{bucket_name}.#{domain}"
+      else
+        "https://#{domain}/#{bucket_name}"
       end
     end
 
@@ -249,7 +249,7 @@ class Wad
       :bucket_name => s3_bucket_name,
       :access_key_id => s3_access_key_id,
       :secret_access_key => s3_secret_access_key,
-      :bucket_in_path => (ENV['WAD_BUCKET_IN_PATH'] == 'true')
+      :bucket_in_hostname => (ENV['WAD_BUCKET_IN_HOSTNAME'] == 'true')
     }
   end
 
